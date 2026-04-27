@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Abonaments
+{
+    internal class OffersList
+    {
+        private List<AbonamentOffer> _oferty;
+        public List<AbonamentOffer> WszystkieOferty
+        {
+            get { return _oferty; }
+        }
+        public OffersList()
+        {
+            _oferty = new List<AbonamentOffer>();
+        }
+        public void DodajOferte(AbonamentOffer oferta)
+        {
+            _oferty.Add(oferta);
+        }
+        public AbonamentOffer NajtanszaOferta()
+        {
+            if (_oferty.Count == 0) return null;
+            AbonamentOffer najtansza = _oferty[0];
+            foreach (var oferta in _oferty)
+            {
+                if (oferta.OplataMiesieczna < najtansza.OplataMiesieczna)
+                {
+                    najtansza = oferta;
+                }
+            }
+            return najtansza;
+        }
+        public AbonamentOffer NajkrotszaUmowa()
+        {
+            if (_oferty.Count == 0) return null;
+            AbonamentOffer najkrotsza = _oferty[0];
+            foreach (var oferta in _oferty)
+            {
+                if (oferta.DlugoscUmowyMiesiace < najkrotsza.DlugoscUmowyMiesiace)
+                {
+                    najkrotsza = oferta;
+                }
+            }
+            return najkrotsza;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+﻿using Abonaments;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        OffersList lista = new OffersList();
+        lista.DodajOferte(new AbonamentOffer(24, 59.99m, 10));
+        lista.DodajOferte(new AbonamentOffer(12, 89.00m, 65));
+        lista.DodajOferte(new AbonamentOffer(36, 45.50m, 20));
+
+        foreach (var oferta in lista.WszystkieOferty)
+        {
+            Console.WriteLine(oferta.PobierzInformacje());
+        }
+        Console.WriteLine();
+        var najtansza = lista.NajtanszaOferta();
+        if (najtansza != null)
+            Console.WriteLine($"Najtańszy abonament: {najtansza.PobierzInformacje()}");
+        Console.WriteLine();
+        var najkrotsza = lista.NajkrotszaUmowa();
+        if (najkrotsza != null)
+            Console.WriteLine($"Najkrótsza umowa: {najkrotsza.PobierzInformacje()}");
+        Console.WriteLine();
+        DateTime data1 = new DateTime(2025, 1, 15);
+        Customer klient1 = new Customer(1, "Jan", "Kowalski", najtansza, data1);
+        Console.WriteLine($"Do końca umowy pozostało: {klient1.IleDoKoncaUmowy()} miesięcy");
+        Console.ReadLine();
+    }
+}
